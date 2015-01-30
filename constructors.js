@@ -54,6 +54,21 @@
  * @property {string} description
  */
 
+function DamageSpell (name, cost, damage, description){
+  //instance properties
+  this.damage = damage;
+
+  //call super constructor
+  Spell.call(this, name, cost, description);
+
+}
+
+DamageSpell.prototype = Object.create(Spell.prototype, {
+  constructor : {
+    value : Spell
+
+  }
+});
 
 
 /**
