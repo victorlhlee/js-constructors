@@ -16,6 +16,19 @@
    * @name printDetails
    */
 
+   function Spell (name, cost, description){
+      this.name = name;
+      this.cost = cost;
+      this.description = description;
+    
+  }
+
+  Spell.prototype.printDetails = function (){
+      console.log(this.name + '  ' + this.cost + ' '  + this.description);
+
+  };
+
+
 /**
  * A spell that deals damage.
  * We want to keep this code DRY (Don't Repeat Yourself).
@@ -40,6 +53,8 @@
  * @property {number} damage
  * @property {string} description
  */
+
+
 
 /**
  * Now that you've created some spells, let's create
