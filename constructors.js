@@ -58,11 +58,11 @@ function DamageSpell (name, cost, damage, description){
   //instance properties
   this.damage = damage;
 
-  //call super constructor
+  //call Spell's constructor function
   Spell.call(this, name, cost, description);
 
 }
-
+//instance of Spell and DamageSpell
 DamageSpell.prototype = Object.create(Spell.prototype, {
   constructor : {
     value : Spell
@@ -85,6 +85,13 @@ DamageSpell.prototype = Object.create(Spell.prototype, {
  * @property {boolean} isAlive  Default value should be `true`.
  */
 
+   function Spellcaster (name, health, mana, isAlive){
+      this.name = name;
+      this.health = health;
+      this.mana = mana;
+      this.isAlive = true;
+    }
+
   /**
    * The spellcaster loses health equal to `damage`.
    * Health should never be negative.
@@ -95,6 +102,17 @@ DamageSpell.prototype = Object.create(Spell.prototype, {
    * @param  {number} damage  Amount of damage to deal to the spellcaster
    */
 
+   
+    Spellcaster.prototype.inflictDamage = function (damage){
+      
+      this.health -= damage; //x = x - y 
+
+      if(this.health <= 0){
+        this.health = 0;
+        this.isAlive = false;
+      }
+    };
+
   /**
    * Reduces the spellcaster's mana by `cost`.
    * Mana should only be reduced only if there is enough mana to spend.
@@ -103,6 +121,16 @@ DamageSpell.prototype = Object.create(Spell.prototype, {
    * @param  {number} cost      The amount of mana to spend.
    * @return {boolean} success  Whether mana was successfully spent.
    */
+
+   Spellcaster.prototype.spendMana = function (cost){
+    if(this.mana >= cost){
+      //reduce spellcaster's mana by cost
+      this.mana = this.mana - cost;
+      return true;
+    }else{
+      return false;
+    }
+   }; 
 
   /**
    * Allows the spellcaster to cast spells.
@@ -129,3 +157,6 @@ DamageSpell.prototype = Object.create(Spell.prototype, {
    * @param  {Spellcaster} target         The spell target to be inflicted.
    * @return {boolean}                    Whether the spell was successfully cast.
    */
+  
+
+   
