@@ -184,4 +184,3 @@ DamageSpell.prototype = Object.create(Spell.prototype, {
   };
 
 
-
