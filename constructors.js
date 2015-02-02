@@ -159,4 +159,29 @@ DamageSpell.prototype = Object.create(Spell.prototype, {
    */
   
 
-   
+   Spellcaster.prototype.invoke = function (spell, target) {
+    // testing to see if the first parameter is defined spell; if test over
+    if (spell === undefined || spell === null){
+      return false;
+    }
+    //confirming that spell is an instance of Damagespell and confirming that our target is a spellcaster
+    if(spell instanceof DamageSpell && target instanceof Spellcaster){
+      //checks to see if there is enough mana to to cast a spell
+      if(this.spendMana(spell.cost)){
+        //we are attacking our target after confirming our 1) target 2)enough mana
+        target.inflictDamage(spell.damage);
+         return true;
+      }
+    }
+    if(spell instanceof DamageSpell && !(target instanceof Spellcaster)){
+      return false;
+    }else{
+      if(this.spendMana(spell.cost)){
+        return true;
+      }
+    }
+      return false;
+  };
+
+
+
